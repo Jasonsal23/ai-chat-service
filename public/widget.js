@@ -150,6 +150,11 @@
     document.getElementById('ai-chat-input').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') sendMessage();
     });
+    setTimeout(function() {
+      if (!isOpen) {
+        toggleChat();
+      }
+    }, 5000);
   }
 
   function toggleChat() {
