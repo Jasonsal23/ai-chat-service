@@ -8,6 +8,7 @@ const path = require('path');
 const app = express();
 const client = new Anthropic();
 
+app.use('/assets', express.static('assets'));
 app.use(express.json());
 app.use(cors());
 
