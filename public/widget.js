@@ -174,7 +174,7 @@
   }
 
   // Exposed globally so the close button's inline onclick can call it
-  window.toggleAiChat = function() { toggleChat(); };
+  window.toggleAiChat = function() { toggleChat('close'); };
 
   function handleViewportResize() {
     if (!isOpen || window.innerWidth > 480) return;
@@ -197,7 +197,7 @@
   function toggleChat(mode) {
     const win = document.getElementById('ai-chat-window');
     // If in peek mode and user taps bubble, expand to full instead of closing
-    if (isOpen && win.classList.contains('mobile-peek')) {
+    if (mode !== 'close' && isOpen && win.classList.contains('mobile-peek')) {
       win.classList.remove('mobile-peek');
       document.getElementById('ai-chat-input').focus();
       return;
@@ -251,6 +251,11 @@
     messages.push({ role: 'user', text: msg });
     input.value = '';
     isLoading = true;
+    // Expand out of peek mode when user sends their first message
+    const win = document.getElementById('ai-chat-window');
+    if (win && win.classList.contains('mobile-peek')) {
+      win.classList.remove('mobile-peek');
+    }
     renderMessages();
 
     try {
