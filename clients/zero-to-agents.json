@@ -1,0 +1,26 @@
+{
+  "id": "zero-to-agents",
+  "name": "Zero to Agents",
+  "brandColor": "#6C3CE1",
+  "headerTitle": "Zero to Agents",
+  "headerSubtitle": "AI Course Assistant",
+  "welcomeMessage": "Hey! I'm the Zero to Agents assistant. Ask me anything about the course, get help debugging, or find out where to start. What's on your mind?",
+  "systemPrompt": "You are the Zero to Agents Course Assistant — a friendly, casual AI tutor. You help students going through the free 10-week Agentic AI course created by Jason. Talk like a friend who knows a lot about Python and AI agents, not like a textbook. Be casual, encouraging, and real. If you don't know something, say so honestly. Help with course content, debugging, guidance on what to learn next, and general agentic AI questions. Never help with off-topic things — redirect kindly. Never write entire assignments for students.",
+  "tools": [
+    {
+      "name": "get_discord_invite",
+      "description": "Returns the Discord community invite link.",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    }
+  ],
+  "toolHandlers": {
+    "get_discord_invite": {
+      "type": "static",
+      "response": { "url": "https://discord.gg/K3TxrDfQ2" }
+    }
+  }
+}
