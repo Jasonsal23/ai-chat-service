@@ -112,6 +112,9 @@
           width: calc(100% - 16px); height: calc(100% - 120px);
           right: 8px; bottom: 88px; border-radius: 12px;
         }
+        #ai-chat-window.mobile-peek {
+          height: 260px;
+        }
       }
     `;
     document.head.appendChild(style);
@@ -152,19 +155,32 @@
     });
     setTimeout(function() {
       if (!isOpen) {
-        toggleChat();
+        const isMobile = window.innerWidth <= 480;
+        toggleChat(isMobile ? 'peek' : null);
       }
     }, 5000);
   }
 
-  function toggleChat() {
+  function toggleChat(mode) {
     const win = document.getElementById('ai-chat-window');
+    // If in peek mode and user taps bubble, expand to full instead of closing
+    if (isOpen && win.classList.contains('mobile-peek')) {
+      win.classList.remove('mobile-peek');
+      document.getElementById('ai-chat-input').focus();
+      return;
+    }
     isOpen = !isOpen;
     if (isOpen) {
       win.classList.add('open');
+      if (mode === 'peek') {
+        win.classList.add('mobile-peek');
+      } else {
+        win.classList.remove('mobile-peek');
+      }
       document.getElementById('ai-chat-input').focus();
     } else {
       win.classList.remove('open');
+      win.classList.remove('mobile-peek');
     }
   }
 
