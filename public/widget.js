@@ -32,6 +32,7 @@
         align-items: center; justify-content: center; cursor: pointer;
         box-shadow: 0 4px 16px rgba(0,0,0,0.3); z-index: 99999;
         transition: transform 0.2s; border: none; outline: none;
+        touch-action: manipulation;
       }
       #ai-chat-bubble:hover { transform: scale(1.08); }
       #ai-chat-bubble svg { width: 28px; height: 28px; fill: white; }
@@ -114,6 +115,12 @@
         }
         #ai-chat-window.mobile-peek {
           height: 260px;
+        }
+        #ai-chat-input {
+          font-size: 16px;
+        }
+        #ai-chat-send {
+          touch-action: manipulation;
         }
       }
     `;
