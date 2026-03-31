@@ -136,7 +136,7 @@
             <p>${config.headerSubtitle}</p>
           </div>
         </div>
-        <button id="ai-chat-close" onclick="document.getElementById('ai-chat-window').classList.remove('open')">&times;</button>
+        <button id="ai-chat-close" onclick="toggleAiChat()">&times;</button>
       </div>
       <div id="ai-chat-messages"></div>
       <div id="ai-chat-input-area">
@@ -153,12 +153,38 @@
     document.getElementById('ai-chat-input').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') sendMessage();
     });
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', handleViewportResize);
+      window.visualViewport.addEventListener('scroll', handleViewportResize);
+    }
     setTimeout(function() {
       if (!isOpen) {
         const isMobile = window.innerWidth <= 480;
         toggleChat(isMobile ? 'peek' : null);
       }
     }, 5000);
+  }
+
+  // Exposed globally so the close button's inline onclick can call it
+  window.toggleAiChat = function() { toggleChat(); };
+
+  function handleViewportResize() {
+    if (!isOpen || window.innerWidth > 480) return;
+    const vv = window.visualViewport;
+    const win = document.getElementById('ai-chat-window');
+    if (!vv || !win) return;
+    // keyboard height = difference between layout and visual viewport
+    const keyboardHeight = window.innerHeight - vv.offsetTop - vv.height;
+    if (keyboardHeight > 50) {
+      // Keyboard is open: anchor window just above keyboard, cap height to visible space
+      win.style.bottom = (keyboardHeight + 8) + 'px';
+      win.style.maxHeight = (vv.height - 16) + 'px';
+    } else {
+      // Keyboard dismissed: restore defaults
+      win.style.bottom = '';
+      win.style.maxHeight = '';
+    }
   }
 
   function toggleChat(mode) {
@@ -181,6 +207,8 @@
     } else {
       win.classList.remove('open');
       win.classList.remove('mobile-peek');
+      win.style.bottom = '';
+      win.style.maxHeight = '';
     }
   }
 
