@@ -68,6 +68,8 @@ app.post('/api/chat', async (req, res) => {
       messages: sessions[sessionKey]
     });
 
+    const cartActionsThisTurn = [];
+
     while (response.stop_reason === 'tool_use') {
       const toolUseBlocks = response.content.filter(block => block.type === 'tool_use');
       sessions[sessionKey].push({ role: 'assistant', content: response.content });
@@ -75,6 +77,7 @@ app.post('/api/chat', async (req, res) => {
       const toolResults = toolUseBlocks.map(toolUse => {
         console.log(`[${clientConfig.id}] Tool called: ${toolUse.name}`, toolUse.input);
         const result = executeTool(clientConfig, toolUse.name, toolUse.input);
+        try { const p = JSON.parse(result); if (p.cartAction) cartActionsThisTurn.push(p.cartAction); } catch(e) {}
         return { type: 'tool_result', tool_use_id: toolUse.id, content: result };
       });
 
@@ -96,20 +99,7 @@ app.post('/api/chat', async (req, res) => {
 
     sessions[sessionKey].push({ role: 'assistant', content: response.content });
 
-    // Check if any tool calls were cart actions
-    let lastCartAction = null;
-    const sessionMsgs = sessions[sessionKey] || [];
-    for (const msg of sessionMsgs) {
-      if (Array.isArray(msg.content)) {
-        for (const block of msg.content) {
-          if (block.type === 'tool_result') {
-            try { const p = JSON.parse(block.content); if (p.cartAction) lastCartAction = p.cartAction; } catch(e) {}
-          }
-        }
-      }
-    }
-
-    res.json({ reply: assistantMessage, cartAction: lastCartAction });
+    res.json({ reply: assistantMessage, cartActions: cartActionsThisTurn });
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ error: 'Something went wrong' });

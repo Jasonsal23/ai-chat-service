@@ -260,7 +260,8 @@
       });
       const data = await res.json();
       messages.push({ role: 'bot', text: data.reply });
-      if (data.cartAction) { window.postMessage(data.cartAction, '*'); }
+      const cartActions = data.cartActions || (data.cartAction ? [data.cartAction] : []);
+      cartActions.forEach(action => window.postMessage(action, '*'));
     } catch {
       messages.push({ role: 'bot', text: 'Sorry, something went wrong. Please try again.' });
     }
