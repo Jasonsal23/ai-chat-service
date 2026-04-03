@@ -173,7 +173,6 @@
     }, 5000);
   }
 
-  // Exposed globally so the close button's inline onclick can call it
   window.toggleAiChat = function() { toggleChat('close'); };
 
   function handleViewportResize() {
@@ -181,14 +180,11 @@
     const vv = window.visualViewport;
     const win = document.getElementById('ai-chat-window');
     if (!vv || !win) return;
-    // keyboard height = difference between layout and visual viewport
     const keyboardHeight = window.innerHeight - vv.offsetTop - vv.height;
     if (keyboardHeight > 50) {
-      // Keyboard is open: anchor window just above keyboard, cap height to visible space
       win.style.bottom = (keyboardHeight + 8) + 'px';
       win.style.maxHeight = (vv.height - 16) + 'px';
     } else {
-      // Keyboard dismissed: restore defaults
       win.style.bottom = '';
       win.style.maxHeight = '';
     }
@@ -196,7 +192,6 @@
 
   function toggleChat(mode) {
     const win = document.getElementById('ai-chat-window');
-    // If in peek mode and user taps bubble, expand to full instead of closing
     if (mode !== 'close' && isOpen && win.classList.contains('mobile-peek')) {
       win.classList.remove('mobile-peek');
       document.getElementById('ai-chat-input').focus();
@@ -251,7 +246,6 @@
     messages.push({ role: 'user', text: msg });
     input.value = '';
     isLoading = true;
-    // Expand out of peek mode when user sends their first message
     const win = document.getElementById('ai-chat-window');
     if (win && win.classList.contains('mobile-peek')) {
       win.classList.remove('mobile-peek');
@@ -266,6 +260,7 @@
       });
       const data = await res.json();
       messages.push({ role: 'bot', text: data.reply });
+      if (data.cartAction) { window.postMessage(data.cartAction, '*'); }
     } catch {
       messages.push({ role: 'bot', text: 'Sorry, something went wrong. Please try again.' });
     }
@@ -273,4 +268,16 @@
     isLoading = false;
     renderMessages();
   }
+
+  // Listen for add-to-cart confirmations from the parent site
+  window.addEventListener('message', function(event) {
+    if (event.data && event.data.type === 'GERA_ADD_TO_CART_RESULT') {
+      if (event.data.success) {
+        messages.push({ role: 'bot', text: 'Added to your cart! Ready to keep shopping or wanna check out?' });
+      } else {
+        messages.push({ role: 'bot', text: 'Couldn\'t add that to cart — ' + event.data.error + '. Try again or hit us at g.erabrand21@gmail.com' });
+      }
+      renderMessages();
+    }
+  });
 })();

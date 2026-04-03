@@ -33,6 +33,10 @@ function executeTool(clientConfig, toolName, toolInput) {
     return JSON.stringify(handler.response);
   }
 
+  if (handler.type === 'cart_action') {
+    return JSON.stringify({ cartAction: { type: 'GERA_ADD_TO_CART', productId: toolInput.productId, variantLabel: toolInput.variantLabel, quantity: toolInput.quantity || 1 }, message: 'Item added to cart' });
+  }
+
   return JSON.stringify({ error: 'Unknown handler type' });
 }
 
@@ -92,7 +96,20 @@ app.post('/api/chat', async (req, res) => {
 
     sessions[sessionKey].push({ role: 'assistant', content: response.content });
 
-    res.json({ reply: assistantMessage });
+    // Check if any tool calls were cart actions
+    let lastCartAction = null;
+    const sessionMsgs = sessions[sessionKey] || [];
+    for (const msg of sessionMsgs) {
+      if (Array.isArray(msg.content)) {
+        for (const block of msg.content) {
+          if (block.type === 'tool_result') {
+            try { const p = JSON.parse(block.content); if (p.cartAction) lastCartAction = p.cartAction; } catch(e) {}
+          }
+        }
+      }
+    }
+
+    res.json({ reply: assistantMessage, cartAction: lastCartAction });
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ error: 'Something went wrong' });
