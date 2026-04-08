@@ -295,17 +295,26 @@
         body: JSON.stringify({ message: msg, sessionId, clientId })
       });
       const data = await res.json();
-      messages.push({ role: 'bot', text: data.reply });
       const cartActions = data.cartActions || (data.cartAction ? [data.cartAction] : []);
+      const soldOutMessages = [];
+      const validActions = [];
       cartActions.forEach(action => {
         const soldOut = checkSoldOut(action.variantLabel);
         if (soldOut) {
-          messages.push({ role: 'bot', text: soldOut });
-          renderMessages();
+          soldOutMessages.push(soldOut);
         } else {
-          window.postMessage(action, '*');
+          validActions.push(action);
         }
       });
+      // Only show Claude's reply if no items were blocked as sold out
+      if (soldOutMessages.length === 0) {
+        messages.push({ role: 'bot', text: data.reply });
+        validActions.forEach(action => window.postMessage(action, '*'));
+      } else {
+        soldOutMessages.forEach(msg => messages.push({ role: 'bot', text: msg }));
+        // Still fire valid actions if it was a mixed request (some in stock, some not)
+        validActions.forEach(action => window.postMessage(action, '*'));
+      }
     } catch {
       messages.push({ role: 'bot', text: 'Sorry, something went wrong. Please try again.' });
     }
