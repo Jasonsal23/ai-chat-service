@@ -46,7 +46,7 @@ const sessions = {};
 // Chat endpoint
 app.post('/api/chat', async (req, res) => {
   try {
-    const { message, sessionId, clientId } = req.body;
+    const { message, sessionId, clientId, silent } = req.body;
 
     const clientConfig = loadClient(clientId);
     if (!clientConfig) {
@@ -59,6 +59,10 @@ app.post('/api/chat', async (req, res) => {
     }
 
     sessions[sessionKey].push({ role: 'user', content: message });
+
+    if (silent) {
+      return res.json({ reply: '', cartActions: [] });
+    }
 
     let response = await client.messages.create({
       model: 'claude-sonnet-4-20250514',

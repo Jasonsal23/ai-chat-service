@@ -301,19 +301,26 @@
       cartActions.forEach(action => {
         const soldOut = checkSoldOut(action.variantLabel);
         if (soldOut) {
-          soldOutMessages.push(soldOut);
+          soldOutMessages.push({ message: soldOut, variantLabel: action.variantLabel });
         } else {
           validActions.push(action);
         }
       });
-      // Only show Claude's reply if no items were blocked as sold out
+
       if (soldOutMessages.length === 0) {
         messages.push({ role: 'bot', text: data.reply });
         validActions.forEach(action => window.postMessage(action, '*'));
       } else {
-        soldOutMessages.forEach(msg => messages.push({ role: 'bot', text: msg }));
-        // Still fire valid actions if it was a mixed request (some in stock, some not)
+        // Show sold-out message to user instead of Claude's reply
+        soldOutMessages.forEach(item => messages.push({ role: 'bot', text: item.message }));
         validActions.forEach(action => window.postMessage(action, '*'));
+        // Silently notify Claude's session so it knows the item was sold out
+        const soldOutSummary = soldOutMessages.map(item => `"${item.variantLabel}" is sold out on the page and was not added to cart.`).join(' ');
+        fetch(`${serverUrl}/api/chat`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: `[Cart update: ${soldOutSummary} Do not tell the customer it was added — it was not.]`, sessionId, clientId, silent: true })
+        }).catch(() => {});
       }
     } catch {
       messages.push({ role: 'bot', text: 'Sorry, something went wrong. Please try again.' });
