@@ -238,6 +238,42 @@
     container.scrollTop = container.scrollHeight;
   }
 
+  function checkSoldOut(variantLabel) {
+    // Check style dropdown (hats + cards) — option disabled or text contains "— Sold Out"
+    if (variantLabel) {
+      const selects = document.querySelectorAll('select');
+      for (const select of selects) {
+        for (const option of select.options) {
+          const optionText = option.text.replace(' \u2014 Sold Out', '').trim();
+          if (optionText === variantLabel) {
+            if (option.disabled || option.text.includes('Sold Out')) {
+              return 'That style is sold out right now. Pick a different one and I got you.';
+            }
+          }
+        }
+      }
+
+      // Check size buttons on detail page — button text matches size and has disabled attribute
+      const sizeButtons = document.querySelectorAll('button[disabled]');
+      for (const btn of sizeButtons) {
+        if (btn.textContent.trim() === variantLabel) {
+          return 'That size is sold out. Want to try a different size?';
+        }
+      }
+    }
+
+    // Check Add to Cart button — if disabled or says SOLD OUT, whole product is out of stock
+    const allButtons = document.querySelectorAll('button');
+    for (const btn of allButtons) {
+      const text = btn.textContent.trim().toUpperCase();
+      if ((text === 'SOLD OUT' || text === 'ADD TO CART') && btn.disabled && text === 'SOLD OUT') {
+        return "That product is sold out. Hit up g.erabrand21@gmail.com to get notified when it's back.";
+      }
+    }
+
+    return null;
+  }
+
   async function sendMessage() {
     const input = document.getElementById('ai-chat-input');
     const msg = input.value.trim();
@@ -261,7 +297,15 @@
       const data = await res.json();
       messages.push({ role: 'bot', text: data.reply });
       const cartActions = data.cartActions || (data.cartAction ? [data.cartAction] : []);
-      cartActions.forEach(action => window.postMessage(action, '*'));
+      cartActions.forEach(action => {
+        const soldOut = checkSoldOut(action.variantLabel);
+        if (soldOut) {
+          messages.push({ role: 'bot', text: soldOut });
+          renderMessages();
+        } else {
+          window.postMessage(action, '*');
+        }
+      });
     } catch {
       messages.push({ role: 'bot', text: 'Sorry, something went wrong. Please try again.' });
     }
