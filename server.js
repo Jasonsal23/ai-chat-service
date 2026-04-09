@@ -20,7 +20,7 @@ function loadClient(clientId) {
 }
 
 // Execute tool based on client config
-function executeTool(clientConfig, toolName, toolInput) {
+async function executeTool(clientConfig, toolName, toolInput) {
   const handler = clientConfig.toolHandlers?.[toolName];
   if (!handler) return JSON.stringify({ error: 'Unknown tool' });
 
@@ -31,6 +31,21 @@ function executeTool(clientConfig, toolName, toolInput) {
   if (handler.type === 'log') {
     console.log(`[${clientConfig.id}] Lead collected:`, toolInput);
     return JSON.stringify(handler.response);
+  }
+
+  if (handler.type === 'webhook') {
+    try {
+      const r = await fetch(handler.url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(toolInput)
+      });
+      const data = await r.json();
+      return JSON.stringify(data);
+    } catch (err) {
+      console.error(`[${clientConfig.id}] Webhook error:`, err);
+      return JSON.stringify({ success: false, error: 'Failed to submit inquiry' });
+    }
   }
 
   if (handler.type === 'cart_action') {
@@ -78,12 +93,12 @@ app.post('/api/chat', async (req, res) => {
       const toolUseBlocks = response.content.filter(block => block.type === 'tool_use');
       sessions[sessionKey].push({ role: 'assistant', content: response.content });
 
-      const toolResults = toolUseBlocks.map(toolUse => {
+      const toolResults = await Promise.all(toolUseBlocks.map(async toolUse => {
         console.log(`[${clientConfig.id}] Tool called: ${toolUse.name}`, toolUse.input);
-        const result = executeTool(clientConfig, toolUse.name, toolUse.input);
+        const result = await executeTool(clientConfig, toolUse.name, toolUse.input);
         try { const p = JSON.parse(result); if (p.cartAction) cartActionsThisTurn.push(p.cartAction); } catch(e) {}
         return { type: 'tool_result', tool_use_id: toolUse.id, content: result };
-      });
+      }));
 
       sessions[sessionKey].push({ role: 'user', content: toolResults });
 

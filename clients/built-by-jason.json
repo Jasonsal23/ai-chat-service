@@ -2,7 +2,7 @@
   "id": "built-by-jason",
   "name": "Built by Jason",
   "brandColor": "#111827",
-  "logoUrl": "",
+  "logoUrl": "https://ai-chat-service-production-9741.up.railway.app/assets/built-by-jason.png",
   "headerTitle": "Built by Jason",
   "headerSubtitle": "Web Dev & AI Solutions",
   "welcomeMessage": "What's up — I'm Jason's assistant. Looking to get a website built, add an AI chatbot to your business, or just want to see what's possible? Ask me anything or I can help you get in touch with Jason directly.",
@@ -68,8 +68,8 @@
   ],
   "toolHandlers": {
     "submit_inquiry": {
-      "type": "log",
-      "response": { "success": true, "message": "Inquiry received" }
+      "type": "webhook",
+      "url": "https://builtbyjason.dev/api/contact"
     },
     "get_services": {
       "type": "static",
