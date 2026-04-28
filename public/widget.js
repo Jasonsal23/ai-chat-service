@@ -37,6 +37,18 @@
       #ai-chat-bubble:hover { transform: scale(1.08); }
       #ai-chat-bubble svg { width: 28px; height: 28px; fill: white; }
 
+      @keyframes ai-chat-shake {
+        0%   { transform: rotate(0deg) scale(1); }
+        15%  { transform: rotate(-15deg) scale(1.1); }
+        30%  { transform: rotate(12deg) scale(1.1); }
+        45%  { transform: rotate(-10deg) scale(1.1); }
+        60%  { transform: rotate(8deg) scale(1.05); }
+        75%  { transform: rotate(-5deg) scale(1.05); }
+        90%  { transform: rotate(3deg) scale(1); }
+        100% { transform: rotate(0deg) scale(1); }
+      }
+      #ai-chat-bubble.shake { animation: ai-chat-shake 0.6s ease; }
+
       #ai-chat-window {
         position: fixed; bottom: 96px; right: 24px; width: 380px; height: 520px;
         background: #1a1a1a; border-radius: 16px; display: none; flex-direction: column;
@@ -165,11 +177,18 @@
       window.visualViewport.addEventListener('resize', handleViewportResize);
       window.visualViewport.addEventListener('scroll', handleViewportResize);
     }
+    // Shake the bubble after 5s, then again every 30s if still closed
+    function shakeBubble() {
+      if (isOpen) return;
+      const bubble = document.getElementById('ai-chat-bubble');
+      bubble.classList.add('shake');
+      bubble.addEventListener('animationend', function() {
+        bubble.classList.remove('shake');
+      }, { once: true });
+    }
     setTimeout(function() {
-      if (!isOpen) {
-        const isMobile = window.innerWidth <= 480;
-        toggleChat(isMobile ? 'peek' : null);
-      }
+      shakeBubble();
+      setInterval(shakeBubble, 30000);
     }, 5000);
   }
 
