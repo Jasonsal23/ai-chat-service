@@ -49,6 +49,25 @@
       }
       #ai-chat-bubble.shake { animation: ai-chat-shake 0.6s ease; }
 
+      #ai-chat-robot {
+        position: fixed; bottom: 82px; right: 27px; width: 46px;
+        z-index: 99998; pointer-events: none;
+        transform: translateY(60px); opacity: 0;
+        transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s ease;
+      }
+      #ai-chat-robot.visible { transform: translateY(0px); opacity: 1; }
+      @keyframes ai-robot-wave {
+        0%   { transform: rotate(0deg); transform-origin: bottom center; }
+        20%  { transform: rotate(30deg); transform-origin: bottom center; }
+        40%  { transform: rotate(-10deg); transform-origin: bottom center; }
+        60%  { transform: rotate(25deg); transform-origin: bottom center; }
+        80%  { transform: rotate(-5deg); transform-origin: bottom center; }
+        100% { transform: rotate(0deg); transform-origin: bottom center; }
+      }
+      #ai-chat-robot.visible #ai-robot-arm {
+        animation: ai-robot-wave 0.8s ease 0.4s 2;
+      }
+
       #ai-chat-window {
         position: fixed; bottom: 96px; right: 24px; width: 380px; height: 520px;
         background: #1a1a1a; border-radius: 16px; display: none; flex-direction: column;
@@ -144,6 +163,40 @@
     bubble.onclick = toggleChat;
     document.body.appendChild(bubble);
 
+    const robot = document.createElement('div');
+    robot.id = 'ai-chat-robot';
+    robot.innerHTML = `
+      <svg viewBox="0 0 46 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- antenna -->
+        <line x1="23" y1="0" x2="23" y2="7" stroke="${config.brandColor}" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="23" cy="4" r="3" fill="${config.brandColor}"/>
+        <!-- head -->
+        <rect x="8" y="7" width="30" height="22" rx="6" fill="${config.brandColor}"/>
+        <!-- eyes -->
+        <circle cx="17" cy="17" r="3.5" fill="white"/>
+        <circle cx="29" cy="17" r="3.5" fill="white"/>
+        <circle cx="18" cy="17" r="1.5" fill="#111"/>
+        <circle cx="30" cy="17" r="1.5" fill="#111"/>
+        <!-- mouth -->
+        <rect x="16" y="24" width="14" height="3" rx="1.5" fill="rgba(255,255,255,0.4)"/>
+        <!-- body -->
+        <rect x="11" y="31" width="24" height="18" rx="5" fill="${config.brandColor}"/>
+        <!-- chest light -->
+        <circle cx="23" cy="40" r="4" fill="rgba(255,255,255,0.3)"/>
+        <!-- waving arm -->
+        <g id="ai-robot-arm">
+          <rect x="35" y="31" width="8" height="4" rx="2" fill="${config.brandColor}"/>
+          <rect x="40" y="27" width="4" height="8" rx="2" fill="${config.brandColor}"/>
+        </g>
+        <!-- other arm -->
+        <rect x="3" y="31" width="8" height="4" rx="2" fill="${config.brandColor}"/>
+        <!-- legs -->
+        <rect x="14" y="49" width="6" height="5" rx="2" fill="${config.brandColor}"/>
+        <rect x="26" y="49" width="6" height="5" rx="2" fill="${config.brandColor}"/>
+      </svg>
+    `;
+    document.body.appendChild(robot);
+
     const win = document.createElement('div');
     win.id = 'ai-chat-window';
     win.innerHTML = `
@@ -177,7 +230,6 @@
       window.visualViewport.addEventListener('resize', handleViewportResize);
       window.visualViewport.addEventListener('scroll', handleViewportResize);
     }
-    // Shake the bubble after 5s, then again every 30s if still closed
     function shakeBubble() {
       if (isOpen) return;
       const bubble = document.getElementById('ai-chat-bubble');
@@ -186,9 +238,22 @@
         bubble.classList.remove('shake');
       }, { once: true });
     }
+
+    function showRobot() {
+      if (isOpen) return;
+      const robot = document.getElementById('ai-chat-robot');
+      robot.classList.add('visible');
+      setTimeout(function() {
+        robot.classList.remove('visible');
+      }, 3500);
+    }
+
+    // Shake at 5s, then every 30s show the robot
     setTimeout(function() {
       shakeBubble();
-      setInterval(shakeBubble, 30000);
+      setInterval(function() {
+        if (!isOpen) showRobot();
+      }, 30000);
     }, 5000);
   }
 
@@ -218,6 +283,8 @@
     }
     isOpen = !isOpen;
     if (isOpen) {
+      const robot = document.getElementById('ai-chat-robot');
+      if (robot) robot.classList.remove('visible');
       win.classList.add('open');
       if (mode === 'peek') {
         win.classList.add('mobile-peek');
