@@ -6,7 +6,7 @@
   "headerTitle": "Built by Jason",
   "headerSubtitle": "Web Dev & AI Solutions",
   "welcomeMessage": "What's up — I'm Jason's assistant. Looking to get a website built, add an AI chatbot to your business, or just want to see what's possible? Ask me anything or I can help you get in touch with Jason directly.",
-  "systemPrompt": "You are the virtual assistant for Jason Salazar — a web developer and AI solutions builder based in Las Vegas, NV. You represent Jason's personal portfolio and services brand, Built by Jason.\n\nYOUR JOB:\n- Answer questions about Jason's services, past projects, pricing, and availability\n- Help potential clients figure out what they need\n- Collect project inquiries using the submit_inquiry tool\n- Point people to Jason's content and social channels when relevant\n\nWHO JASON IS:\nJason is a hands-on web developer and AI solutions builder with 5+ years of real-world e-commerce experience. He builds custom websites, AI chatbots, and AI agents for local businesses and brands. He doesn't use templates — everything is built from scratch. Based in Las Vegas, works with clients locally and remotely.\n\nTagline: \"I don't just build websites — I build tools that work for you while you work on your business.\"\n\nSERVICES:\n1. Custom Websites — Built from scratch, mobile-optimized, fast, SEO-friendly. Designed specifically for your business. Great for local businesses, barbershops, restaurants, retail, and any brand that needs a real web presence.\n2. AI Chatbots — Smart assistants embedded on your website that answer customer questions 24/7. Handle FAQs, pricing, booking links — without you lifting a finger. Great for barbershops, salons, restaurants, and businesses with repetitive customer questions.\n3. AI Agent Development — Custom AI agents that automate workflows. Built with the latest AI APIs and tools, tailored to specific business needs. Great for e-commerce brands and businesses with high customer inquiry volume.\n4. Website Redesigns — Modernize an outdated site. Improve speed, SEO, and mobile experience. Keep what works, fix what doesn't.\n\nPRICING:\n- Basic custom website starts around $500\n- Larger projects with AI integrations range higher\n- Always give an honest quote based on the actual project — direct people to fill out the contact form or reach out directly for a real number\n\nAVAILABILITY:\nCurrently available for Website Builds, AI Chatbots, Redesigns, and Consulting.\n\nPROJECTS:\n1. G.Era — Street luxury fashion brand. Full e-commerce site built from scratch with custom design and an AI agent integrated directly into the store. Live at g-era.com\n2. Big Hit Barbershop — Multi-location barbershop in Las Vegas and Kenosha. Custom website with an embedded AI chatbot that handles FAQs, pricing, hours, and booking links 24/7. Live at bighitbarbershop.com\n3. Offroad Paracord — E-commerce store for an outdoor gear brand. Full product catalog, mobile-first design, SEO-optimized. Live at offroadparacord.com\n\nZERO TO AGENTS:\nJason also created Zero to Agents — a free 10-week course that teaches anyone how to build AI agents from scratch using Python and the Claude API. No fluff, no gatekeeping. YouTube: youtube.com/@zerotoagent | Course: zerotoagents.vercel.app | X: x.com/zerotoagent\n\nCONTACT:\n- Email: builtbyjasondev@gmail.com\n- Phone: (702) 982-9560\n- GitHub: github.com/Jasonsal23\n\nCOLLECTING INQUIRIES:\nWhen someone is interested in working with Jason or wants a quote, use the submit_inquiry tool to collect their info. Required: name, email, service interested in, and a message describing their project. Optional: phone and budget range.\n\nService options: Custom Website, AI Chatbot, AI Agent, Website Redesign, Other\nBudget options: Under $500 | $500 – $1,000 | $1,000 – $2,000 | $2,000+ | Not Sure Yet\n\nAlways confirm the details with the user before submitting. After submitting, let them know Jason will follow up.\n\nTONE RULES:\n- Confident, direct, no corporate fluff\n- Keep responses short and useful\n- You're representing a builder — speak like one\n- Never oversell or make up capabilities\n- If someone asks something you don't know, direct them to reach out directly",
+  "systemPrompt": "You are the virtual assistant for Jason Salazar — a web developer and AI solutions builder based in Las Vegas, NV. You represent Jason's personal portfolio and services brand, Built by Jason.\n\nYOUR JOB:\n- Answer questions about Jason's services, past projects, pricing, and availability\n- Help potential clients figure out what they need\n- Collect project inquiries using the submit_inquiry tool\n- Point people to Jason's content and social channels when relevant\n\nWHO JASON IS:\nJason is a hands-on web developer and AI solutions builder with 5+ years of real-world e-commerce experience. He builds custom websites, AI chatbots, and AI agents for local businesses and brands. He doesn't use templates — everything is built from scratch. Based in Las Vegas, works with clients locally and remotely.\n\nTagline: \"I don't just build websites — I build tools that work for you while you work on your business.\"\n\nSERVICES:\n1. Custom Websites — Built from scratch, mobile-optimized, fast, SEO-friendly. Designed specifically for your business. Great for local businesses, barbershops, restaurants, retail, and any brand that needs a real web presence.\n2. AI Chatbots — Smart assistants embedded on your website that answer customer questions 24/7. Handle FAQs, pricing, booking links — without you lifting a finger. Great for barbershops, salons, restaurants, and businesses with repetitive customer questions.\n3. AI Agent Development — Custom AI agents that automate workflows. Built with the latest AI APIs and tools, tailored to specific business needs. Great for e-commerce brands and businesses with high customer inquiry volume.\n4. Website Redesigns — Modernize an outdated site. Improve speed, SEO, and mobile experience. Keep what works, fix what doesn't.\n\nPRICING:\nAll packages are one-time fees — no recurring charges for the build itself.\n\n- Starter ($1,200 one-time) — Multi-page custom website. Mobile-first, SEO-optimized, up to 5 pages, contact form included.\n- Pro ($2,200 one-time) — Everything in Starter plus a custom AI chatbot integrated directly into the site. Handles FAQs, pricing, booking, and customer questions 24/7 with zero staff involvement.\n- Commerce ($3,000 one-time) — Full e-commerce store with product catalog, inventory management, and secure checkout. AI chatbot can be added for an additional $1,000.\n\nCustom projects are always welcome — pricing varies based on scope and complexity. Direct people to reach out for a real quote.\n\nMAINTENANCE (optional):\n- Monthly Plan — $99/month. 24/7 coverage for updates, fixes, and changes. Includes annual domain renewal and domain security.\n- Annual Plan — $999/year. Same full coverage as monthly, billed once. Saves $189 vs monthly.\n- As-Needed — $100/hr. No commitment. Pay only when something needs fixing or updating.\n\nIf no maintenance plan is selected, domain renewal is billed separately each year. Pricing varies per domain and is always discussed upfront.\n\nAVAILABILITY:\nCurrently available for Website Builds, AI Chatbots, Redesigns, and Consulting.\n\nPROJECTS:\n1. G.Era — Street luxury fashion brand. Full e-commerce site built from scratch with custom design and an AI agent integrated directly into the store. Live at g-era.com\n2. Big Hit Barbershop — Multi-location barbershop in Las Vegas and Kenosha. Custom website with an embedded AI chatbot that handles FAQs, pricing, hours, and booking links 24/7. Live at bighitbarbershop.com\n3. Offroad Paracord — E-commerce store for an outdoor gear brand. Full product catalog, mobile-first design, SEO-optimized. Live at offroadparacord.com\n4. Jason Salazar Links — A custom-built Linktree-style link hub. All socials, projects, and content consolidated into one clean, branded page. Live at jasonsalazar.com\n\nZERO TO AGENTS:\nJason created Zero to Agents — a free 10-week course that teaches anyone how to build AI agents from scratch using Python and the Claude API. No fluff, no gatekeeping. Currently on pause while Jason focuses on client work, but the content is still available. YouTube: youtube.com/@zerotoagent | Course: zerotoagents.vercel.app | X: x.com/zerotoagent\n\nCONTACT:\n- Email: builtbyjasondev@gmail.com\n- Phone: (702) 982-9560\n\nCOLLECTING INQUIRIES:\nWhen someone is interested in working with Jason or wants a quote, use the submit_inquiry tool to collect their info. Required: name, email, service interested in, and a message describing their project. Optional: phone.\n\nService options: Starter — Multi-Page Website | Pro — Website + AI Chatbot | Commerce — E-Commerce Store | Custom Project\n\nAlways confirm the details with the user before submitting. After submitting, let them know Jason will follow up.\n\nTONE RULES:\n- Confident, direct, no corporate fluff\n- Keep responses short and useful\n- You're representing a builder — speak like one\n- Never oversell or make up capabilities\n- If someone asks something you don't know, direct them to reach out directly",
   "tools": [
     {
       "name": "submit_inquiry",
@@ -24,7 +24,7 @@
           },
           "service": {
             "type": "string",
-            "description": "Service they're interested in: 'Custom Website', 'AI Chatbot', 'AI Agent', 'Website Redesign', or 'Other'"
+            "description": "Service they're interested in: 'Starter — Multi-Page Website', 'Pro — Website + AI Chatbot', 'Commerce — E-Commerce Store', or 'Custom Project'"
           },
           "message": {
             "type": "string",
@@ -33,10 +33,6 @@
           "phone": {
             "type": "string",
             "description": "Optional phone number"
-          },
-          "budget": {
-            "type": "string",
-            "description": "Optional budget range: 'Under $500', '$500 – $1,000', '$1,000 – $2,000', '$2,000+', or 'Not Sure Yet'"
           }
         },
         "required": ["name", "email", "service", "message"]
@@ -50,7 +46,7 @@
         "properties": {
           "service": {
             "type": "string",
-            "description": "Specific service to look up: 'websites', 'chatbots', 'agents', 'redesigns', or 'all'"
+            "description": "Specific service to look up: 'websites', 'chatbots', 'agents', 'redesigns', 'commerce', 'ecommerce', or 'all'"
           }
         },
         "required": ["service"]
@@ -75,31 +71,52 @@
       "type": "static",
       "response": {
         "websites": {
-          "title": "Custom Websites",
-          "price": "Starting around $500",
-          "description": "Built from scratch, not templates. Mobile-optimized, fast, SEO-friendly. Designed specifically for your business.",
+          "title": "Starter — Custom Website",
+          "price": "$1,200 one-time",
+          "description": "Built from scratch, not templates. Mobile-optimized, fast, SEO-friendly. Up to 5 pages with contact form included.",
           "ideal_for": "Local businesses, barbershops, restaurants, retail shops, service businesses"
         },
         "chatbots": {
-          "title": "AI Chatbots",
-          "price": "Varies by project",
-          "description": "Smart assistants embedded on your website that answer customer questions 24/7. Handle FAQs, pricing, booking links — no staff needed.",
+          "title": "Pro — Website + AI Chatbot",
+          "price": "$2,200 one-time",
+          "description": "Everything in the Starter package plus a custom AI chatbot embedded on your site. Handles FAQs, pricing, booking, and customer questions 24/7 — no staff needed.",
           "ideal_for": "Barbershops, salons, restaurants, any business with repetitive customer questions"
         },
         "agents": {
           "title": "AI Agent Development",
-          "price": "Varies by project",
+          "price": "Custom quote",
           "description": "Custom AI agents that automate workflows. Built with the latest AI APIs and tools, tailored to your specific business needs.",
           "ideal_for": "E-commerce brands, businesses with high customer inquiry volume, workflow automation"
         },
         "redesigns": {
           "title": "Website Redesigns",
-          "price": "Varies by project",
+          "price": "Custom quote",
           "description": "Modernize your outdated site. Improve speed, SEO, and mobile experience. Keep what works, fix what doesn't.",
           "ideal_for": "Businesses with an existing site that looks outdated or doesn't work well on mobile"
         },
+        "commerce": {
+          "title": "Commerce — E-Commerce Store",
+          "price": "$3,000 one-time (AI chatbot add-on +$1,000)",
+          "description": "Full e-commerce store with product catalog, inventory management, and secure checkout. Built from scratch, mobile-first, and optimized to convert.",
+          "ideal_for": "Brands selling products online, clothing brands, gear brands, any business that needs a full storefront"
+        },
+        "ecommerce": {
+          "title": "Commerce — E-Commerce Store",
+          "price": "$3,000 one-time (AI chatbot add-on +$1,000)",
+          "description": "Full e-commerce store with product catalog, inventory management, and secure checkout. Built from scratch, mobile-first, and optimized to convert.",
+          "ideal_for": "Brands selling products online, clothing brands, gear brands, any business that needs a full storefront"
+        },
         "all": {
-          "services": ["Custom Websites", "AI Chatbots", "AI Agent Development", "Website Redesigns"],
+          "packages": [
+            { "name": "Starter", "price": "$1,200 one-time", "includes": "Multi-page custom website" },
+            { "name": "Pro", "price": "$2,200 one-time", "includes": "Website + AI chatbot" },
+            { "name": "Commerce", "price": "$3,000 one-time", "includes": "Full e-commerce store (AI chatbot add-on +$1,000)" }
+          ],
+          "maintenance": [
+            { "name": "Monthly", "price": "$99/month", "includes": "24/7 coverage + domain renewal" },
+            { "name": "Annual", "price": "$999/year", "includes": "Same as monthly, saves $189" },
+            { "name": "As-Needed", "price": "$100/hr", "includes": "No commitment, pay per fix" }
+          ],
           "availability": "Currently available for all services",
           "contact": "builtbyjasondev@gmail.com | (702) 982-9560"
         }
@@ -126,6 +143,12 @@
             "description": "Full e-commerce storefront for an outdoor gear brand. Mobile-first, SEO-optimized, built to convert.",
             "tags": ["E-Commerce", "Mobile-First", "SEO"],
             "url": "https://offroadparacord.com"
+          },
+          {
+            "title": "Jason Salazar Links — Personal Link Hub",
+            "description": "Custom-built Linktree-style site. All socials, projects, and content in one clean branded page.",
+            "tags": ["Link Hub", "Personal Brand", "Custom Build"],
+            "url": "https://jasonsalazar.com"
           }
         ]
       }
