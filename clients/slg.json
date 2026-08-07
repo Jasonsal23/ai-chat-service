@@ -2,6 +2,7 @@
   "id": "slg",
   "name": "SLG — Shawn Lievense Group",
   "brandColor": "#C9A84C",
+  "logoUrl": "https://ai-chat-service-production-9741.up.railway.app/assets/grace-avatar.png",
   "headerTitle": "SLG Concierge",
   "headerSubtitle": "Real Estate · Investment · Capital",
   "welcomeMessage": "Hi, I'm Grace — the virtual concierge for the Shawn Lievense Group. I can tell you about Shawn's services, current listings, or help you get in touch with him directly. What can I help you with today?",
