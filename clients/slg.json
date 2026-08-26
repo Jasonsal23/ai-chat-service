@@ -139,7 +139,7 @@
     },
     "submit_inquiry": {
       "type": "webhook",
-      "url": "http://localhost:3000/api/contact"
+      "url": "https://www.theslgroup.co/api/contact"
     }
   }
 }
